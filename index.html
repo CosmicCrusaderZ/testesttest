@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basics - Interactive Learning</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>JavaScript Basics</h1>
+        <p>Learn JavaScript through interactive examples</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#variables">Variables</a></li>
+            <li><a href="#functions">Functions</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#dom">DOM Manipulation</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="variables">
+            <h2>Variables & Data Types</h2>
+            <div class="example">
+                <h3>Try it:</h3>
+                <input type="text" id="nameInput" placeholder="Enter your name">
+                <button onclick="greetUser()">Greet Me!</button>
+                <button class="show-code-btn" onclick="toggleCode('greetUserCode')">Show Code</button>
+                <p id="greeting"></p>
+                <div id="greetUserCode" class="code-block hidden">
+                    <h4>JavaScript Code:</h4>
+                    <pre><code>function greetUser() {
+    const nameInput = document.getElementById('nameInput');
+    const greeting = document.getElementById('greeting');
+    
+    const name = nameInput.value.trim();
+    
+    if (name === '') {
+        greeting.textContent = 'Please enter your name!';
+        greeting.style.color = '#e74c3c';
+        return;
+    }
+    
+    const greetingMessage = `Hello, ${name}! Welcome to JavaScript learning!`;
+    greeting.textContent = greetingMessage;
+    greeting.style.color = '#27ae60';
+    
+    // Clear input after greeting
+    nameInput.value = '';
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="functions">
+            <h2>Functions & Calculations</h2>
+            <div class="example">
+                <h3>Calculator:</h3>
+                <input type="number" id="num1" placeholder="First number">
+                <select id="operation">
+                    <option value="add">+</option>
+                    <option value="subtract">-</option>
+                    <option value="multiply">×</option>
+                    <option value="divide">÷</option>
+                </select>
+                <input type="number" id="num2" placeholder="Second number">
+                <button onclick="calculate()">Calculate</button>
+                <button class="show-code-btn" onclick="toggleCode('calculateCode')">Show Code</button>
+                <p id="result"></p>
+                <div id="calculateCode" class="code-block hidden">
+                    <h4>JavaScript Code:</h4>
+                    <pre><code>function calculate() {
+    const num1 = parseFloat(document.getElementById('num1').value);
+    const num2 = parseFloat(document.getElementById('num2').value);
+    const operation = document.getElementById('operation').value;
+    const result = document.getElementById('result');
+    
+    // Validate inputs
+    if (isNaN(num1) || isNaN(num2)) {
+        result.textContent = 'Please enter valid numbers!';
+        result.style.color = '#e74c3c';
+        return;
+    }
+    
+    let calculationResult;
+    let operationSymbol;
+    
+    switch (operation) {
+        case 'add':
+            calculationResult = num1 + num2;
+            operationSymbol = '+';
+            break;
+        case 'subtract':
+            calculationResult = num1 - num2;
+            operationSymbol = '-';
+            break;
+        case 'multiply':
+            calculationResult = num1 * num2;
+            operationSymbol = '×';
+            break;
+        case 'divide':
+            if (num2 === 0) {
+                result.textContent = 'Cannot divide by zero!';
+                result.style.color = '#e74c3c';
+                return;
+            }
+            calculationResult = num1 / num2;
+            operationSymbol = '÷';
+            break;
+    }
+    
+    result.textContent = `${num1} ${operationSymbol} ${num2} = ${calculationResult}`;
+    result.style.color = '#27ae60';
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="events">
+            <h2>Event Handling</h2>
+            <div class="example">
+                <h3>Interactive Elements:</h3>
+                <button id="colorBtn" onclick="changeColor()">Change Background Color</button>
+                <button class="show-code-btn" onclick="toggleCode('changeColorCode')">Show Code</button>
+                <br>
+                <button onclick="showAlert()">Show Alert</button>
+                <button class="show-code-btn" onclick="toggleCode('showAlertCode')">Show Code</button>
+                <div id="clickCounter">
+                    <p>Button clicked: <span id="count">0</span> times</p>
+                    <button onclick="incrementCounter()">Click Me!</button>
+                    <button class="show-code-btn" onclick="toggleCode('incrementCode')">Show Code</button>
+                    <button onclick="resetCounter()">Reset</button>
+                    <button class="show-code-btn" onclick="toggleCode('resetCode')">Show Code</button>
+                </div>
+                
+                <div id="changeColorCode" class="code-block hidden">
+                    <h4>Change Color Function:</h4>
+                    <pre><code>function changeColor() {
+    currentColorIndex = (currentColorIndex + 1) % backgroundColors.length;
+    document.body.style.background = backgroundColors[currentColorIndex];
+    
+    console.log(`Background changed to color ${currentColorIndex + 1}`);
+}</code></pre>
+                </div>
+                
+                <div id="showAlertCode" class="code-block hidden">
+                    <h4>Show Alert Function:</h4>
+                    <pre><code>function showAlert() {
+    const currentTime = new Date().toLocaleTimeString();
+    alert(`Hello from JavaScript! Current time: ${currentTime}`);
+}</code></pre>
+                </div>
+                
+                <div id="incrementCode" class="code-block hidden">
+                    <h4>Increment Counter Function:</h4>
+                    <pre><code>function incrementCounter() {
+    clickCount++;
+    document.getElementById('count').textContent = clickCount;
+    
+    // Add some visual feedback
+    const countElement = document.getElementById('count');
+    countElement.style.transform = 'scale(1.2)';
+    setTimeout(() => {
+        countElement.style.transform = 'scale(1)';
+    }, 200);
+}</code></pre>
+                </div>
+                
+                <div id="resetCode" class="code-block hidden">
+                    <h4>Reset Counter Function:</h4>
+                    <pre><code>function resetCounter() {
+    clickCount = 0;
+    document.getElementById('count').textContent = clickCount;
+    console.log('Counter reset to 0');
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="dom">
+            <h2>DOM Manipulation</h2>
+            <div class="example">
+                <h3>Dynamic Content:</h3>
+                <input type="text" id="todoInput" placeholder="Enter a task">
+                <button onclick="addTodo()">Add Task</button>
+                <button class="show-code-btn" onclick="toggleCode('addTodoCode')">Show Code</button>
+                <ul id="todoList"></ul>
+                <button onclick="clearTodos()">Clear All</button>
+                <button class="show-code-btn" onclick="toggleCode('clearTodosCode')">Show Code</button>
+                
+                <div id="addTodoCode" class="code-block hidden">
+                    <h4>Add Todo Function:</h4>
+                    <pre><code>function addTodo() {
+    const todoInput = document.getElementById('todoInput');
+    const todoList = document.getElementById('todoList');
+    const todoText = todoInput.value.trim();
+    
+    if (todoText === '') {
+        alert('Please enter a task!');
+        return;
+    }
+    
+    // Create list item
+    const li = document.createElement('li');
+    li.innerHTML = `
+        &lt;span&gt;${todoText}&lt;/span&gt;
+        &lt;button onclick="removeTodo(this)" style="background: #e74c3c; padding: 0.5rem; margin-left: 1rem;"&gt;Remove&lt;/button&gt;
+    `;
+    
+    // Add animation
+    li.style.opacity = '0';
+    li.style.transform = 'translateX(-20px)';
+    todoList.appendChild(li);
+    
+    // Animate in
+    setTimeout(() => {
+        li.style.transition = 'all 0.3s ease';
+        li.style.opacity = '1';
+        li.style.transform = 'translateX(0)';
+    }, 10);
+    
+    // Clear input
+    todoInput.value = '';
+}</code></pre>
+                </div>
+                
+                <div id="clearTodosCode" class="code-block hidden">
+                    <h4>Clear Todos Function:</h4>
+                    <pre><code>function clearTodos() {
+    const todoList = document.getElementById('todoList');
+    const todos = todoList.querySelectorAll('li');
+    
+    if (todos.length === 0) {
+        alert('No tasks to clear!');
+        return;
+    }
+    
+    if (confirm('Are you sure you want to clear all tasks?')) {
+        todos.forEach((todo, index) => {
+            setTimeout(() => {
+                todo.style.transition = 'all 0.3s ease';
+                todo.style.opacity = '0';
+                todo.style.transform = 'translateX(20px)';
+                
+                setTimeout(() => {
+                    todo.remove();
+                }, 300);
+            }, index * 100);
+        });
+    }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="array-demo">
+            <h2>Arrays & Loops</h2>
+            <div class="example">
+                <h3>Number Generator:</h3>
+                <button onclick="generateNumbers()">Generate Random Numbers</button>
+                <button class="show-code-btn" onclick="toggleCode('generateCode')">Show Code</button>
+                <div id="numbersList"></div>
+                <button onclick="sortNumbers()">Sort Numbers</button>
+                <button class="show-code-btn" onclick="toggleCode('sortCode')">Show Code</button>
+                
+                <div id="generateCode" class="code-block hidden">
+                    <h4>Generate Numbers Function:</h4>
+                    <pre><code>function generateNumbers() {
+    generatedNumbers = [];
+    
+    // Generate 10 random numbers
+    for (let i = 0; i < 10; i++) {
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        generatedNumbers.push(randomNumber);
+    }
+    
+    displayNumbers();
+    console.log('Generated numbers:', generatedNumbers);
+}
+
+function displayNumbers() {
+    const numbersContainer = document.getElementById('numbersList');
+    numbersContainer.innerHTML = '';
+    
+    if (generatedNumbers.length === 0) {
+        numbersContainer.innerHTML = '&lt;p&gt;No numbers generated yet!&lt;/p&gt;';
+        return;
+    }
+    
+    generatedNumbers.forEach((number, index) => {
+        const numberElement = document.createElement('span');
+        numberElement.className = 'number-item';
+        numberElement.textContent = number;
+        
+        // Add staggered animation
+        numberElement.style.opacity = '0';
+        numberElement.style.transform = 'translateY(20px)';
+        numbersContainer.appendChild(numberElement);
+        
+        setTimeout(() => {
+            numberElement.style.transition = 'all 0.3s ease';
+            numberElement.style.opacity = '1';
+            numberElement.style.transform = 'translateY(0)';
+        }, index * 50);
+    });
+}</code></pre>
+                </div>
+                
+                <div id="sortCode" class="code-block hidden">
+                    <h4>Sort Numbers Function:</h4>
+                    <pre><code>function sortNumbers() {
+    if (generatedNumbers.length === 0) {
+        alert('Generate some numbers first!');
+        return;
+    }
+    
+    // Sort the array
+    generatedNumbers.sort((a, b) => a - b);
+    displayNumbers();
+    
+    console.log('Numbers sorted:', generatedNumbers);
+}</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 JavaScript Learning Website. Built with HTML, CSS, and JavaScript.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
